@@ -9,3 +9,6 @@ i cloned my git repo into my apache /var/www/html folder
 where i ectracted the html file and the css file
 after this i then configurred my apache web serve to index my html file
 and after this i restarted my apache using systemctl 
+and now my webserver is live 
+here is the IP Address 16.171.60.13
+Thank you
