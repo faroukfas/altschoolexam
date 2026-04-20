@@ -1,0 +1,246 @@
+/* ── Hero Section ── */
+#hero {
+  text-align: center;
+  padding: 30px 20px 20px;
+  border-bottom: 2px solid #5dabfe;
+  margin-bottom: 10px;
+}
+
+#hero h1 {
+  font-size: 34px;
+  color: #5dabfe;
+  margin-bottom: 8px;
+}
+
+.hero-sub {
+  font-size: 16px;
+  color: #666;
+  margin-bottom: 20px;
+  font-style: italic;
+}
+
+.badge-row {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 16px;
+}
+
+.badge {
+  background-color: #5dabfe;
+  color: #fff;
+  padding: 5px 14px;
+  border-radius: 20px;
+  font-size: 13px;
+  font-weight: bold;
+  letter-spacing: 0.5px;
+}
+
+/* ── Architecture Grid ── */
+.arch-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  margin: 24px 0;
+}
+
+.arch-card {
+  display: flex;
+  gap: 14px;
+  background-color: #f4f9ff;
+  border: 1px solid #c2dffe;
+  border-radius: 8px;
+  padding: 16px;
+}
+
+.arch-number {
+  background-color: #5dabfe;
+  color: #fff;
+  font-weight: bold;
+  font-size: 18px;
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.arch-content h3 {
+  margin: 0 0 8px;
+  color: #333;
+  font-size: 16px;
+}
+
+.arch-content p {
+  margin: 0 0 6px;
+  font-size: 14px;
+  text-align: left;
+}
+
+.free-tier {
+  color: #2e8b57;
+  font-size: 13px !important;
+  font-weight: bold;
+}
+
+/* ── Traffic Flow ── */
+.flow-box {
+  background-color: #f0f7ff;
+  border: 1px solid #c2dffe;
+  border-radius: 8px;
+  padding: 16px 20px;
+  margin-top: 10px;
+  text-align: center;
+}
+
+.flow-title {
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 12px !important;
+  font-size: 14px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.flow-steps {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+}
+
+.flow-step {
+  background-color: #5dabfe;
+  color: #fff;
+  padding: 6px 16px;
+  border-radius: 6px;
+  font-size: 14px;
+  font-weight: bold;
+}
+
+.flow-arrow {
+  color: #5dabfe;
+  font-size: 20px;
+  font-weight: bold;
+}
+
+/* ── Tools Grid ── */
+.tools-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  margin: 24px 0;
+}
+
+.tool-card {
+  background-color: #f4f9ff;
+  border: 1px solid #c2dffe;
+  border-radius: 8px;
+  padding: 20px;
+}
+
+.tool-card h3 {
+  color: #5dabfe;
+  margin-top: 0;
+  margin-bottom: 12px;
+  font-size: 18px;
+  border-bottom: 1px solid #c2dffe;
+  padding-bottom: 8px;
+}
+
+.tool-card p {
+  font-size: 14px;
+  text-align: left;
+  margin: 0 0 10px;
+}
+
+/* ── Pipeline ── */
+.pipeline {
+  margin: 24px 0;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.pipeline-step {
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+  background-color: #f4f9ff;
+  border: 1px solid #c2dffe;
+  border-radius: 8px;
+  padding: 14px 16px;
+}
+
+.step-num {
+  background-color: #5dabfe;
+  color: #fff;
+  font-weight: bold;
+  font-size: 16px;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.step-text strong {
+  display: block;
+  color: #333;
+  margin-bottom: 4px;
+  font-size: 15px;
+}
+
+.step-text p {
+  margin: 0;
+  font-size: 14px;
+  text-align: left;
+}
+
+/* ── Lessons List ── */
+.lessons-list {
+  padding-left: 20px;
+  margin: 16px 0;
+}
+
+.lessons-list li {
+  margin-bottom: 12px;
+  font-size: 15px;
+  line-height: 1.6;
+}
+
+/* ── Links ── */
+main a {
+  color: #5dabfe;
+  text-decoration: none;
+}
+
+main a:hover {
+  text-decoration: underline;
+}
+
+/* ── Responsive ── */
+@media (max-width: 768px) {
+  .arch-grid,
+  .tools-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .flow-steps {
+    flex-direction: column;
+  }
+
+  .flow-arrow {
+    transform: rotate(90deg);
+  }
+
+  #hero h1 {
+    font-size: 26px;
+  }
+}

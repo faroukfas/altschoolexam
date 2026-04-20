@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Cloud Project – Farouk Fasasi</title>
+  <link href="/Index.css" rel="stylesheet" />
+  <link href="/cloud-project.css" rel="stylesheet" />
+</head>
+
+<body>
+  <header>
+    <nav aria-label="Main Navigation">
+      <ul>
+        <li><a href="/Index.html">HOME</a></li>
+        <li><a href="#overview">OVERVIEW</a></li>
+        <li><a href="#architecture">ARCHITECTURE</a></li>
+        <li><a href="#tools">TOOLS</a></li>
+        <li><a href="#pipeline">PIPELINE</a></li>
+        <li><a href="#lessons">LESSONS</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <section id="hero">
+      <h1>AWS Cloud Project</h1>
+      <p class="hero-sub">Static Website Hosting with CI/CD — by Farouk Fasasi</p>
+      <div class="badge-row">
+        <span class="badge">S3</span>
+        <span class="badge">CloudFront</span>
+        <span class="badge">Route 53</span>
+        <span class="badge">ACM</span>
+        <span class="badge">Terraform</span>
+        <span class="badge">GitHub Actions</span>
+      </div>
+    </section>
+
+    <section id="overview">
+      <h2>PROJECT OVERVIEW</h2>
+      <p>
+        This project involved building and deploying a fully production-grade static website on AWS, hosted entirely
+        within the free tier. What started as a simple static site hosting exercise evolved into a complete
+        Infrastructure as Code (IaC) and CI/CD pipeline project — covering everything from DNS and SSL certificates
+        to automated deployments triggered by a Git push.
+      </p>
+      <p>
+        The live site is accessible at <a href="https://resq.com.ng" target="_blank">https://resq.com.ng</a> and is
+        served globally over HTTPS with a custom domain, managed SSL certificate, and CloudFront CDN caching.
+      </p>
+    </section>
+
+    <section id="architecture">
+      <h2>ARCHITECTURE</h2>
+      <p>The infrastructure is built across four AWS services that work together in a chain:</p>
+
+      <div class="arch-grid">
+        <div class="arch-card">
+          <div class="arch-number">1</div>
+          <div class="arch-content">
+            <h3>Amazon S3</h3>
+            <p>Stores all static website files — HTML, CSS, and images. The bucket is kept private and only accessible by CloudFront via Origin Access Control (OAC).</p>
+            <p class="free-tier">✓ 5 GB storage free · 20K GET / 2K PUT requests free</p>
+          </div>
+        </div>
+
+        <div class="arch-card">
+          <div class="arch-number">2</div>
+          <div class="arch-content">
+            <h3>AWS Certificate Manager</h3>
+            <p>Issues a free SSL/TLS certificate for resq.com.ng and *.resq.com.ng. Auto-renews as long as the DNS validation record stays in Route 53.</p>
+            <p class="free-tier">✓ Free SSL certificate with CloudFront</p>
+          </div>
+        </div>
+
+        <div class="arch-card">
+          <div class="arch-number">3</div>
+          <div class="arch-content">
+            <h3>Amazon CloudFront</h3>
+            <p>Serves the website globally via AWS edge locations. Enforces HTTPS, caches files for performance, and acts as the secure entry point in front of S3.</p>
+            <p class="free-tier">✓ 50 GB transfer free · 2M requests free/month</p>
+          </div>
+        </div>
+
+        <div class="arch-card">
+          <div class="arch-number">4</div>
+          <div class="arch-content">
+            <h3>Amazon Route 53</h3>
+            <p>Manages DNS for resq.com.ng. Alias A records point the root domain and www subdomain directly to the CloudFront distribution.</p>
+            <p class="free-tier">✓ Free DNS queries for A records</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="flow-box">
+        <p class="flow-title">Traffic Flow</p>
+        <div class="flow-steps">
+          <span class="flow-step">Browser</span>
+          <span class="flow-arrow">→</span>
+          <span class="flow-step">Route 53</span>
+          <span class="flow-arrow">→</span>
+          <span class="flow-step">CloudFront + ACM</span>
+          <span class="flow-arrow">→</span>
+          <span class="flow-step">S3 Origin</span>
+        </div>
+      </div>
+    </section>
+
+    <section id="tools">
+      <h2>TOOLS & TECHNOLOGIES</h2>
+      <p>Beyond the AWS services, two key tools were used to manage infrastructure and automate deployments:</p>
+
+      <div class="tools-grid">
+        <div class="tool-card">
+          <h3>Terraform</h3>
+          <p>
+            All AWS infrastructure is written as code using Terraform. This means the entire setup — S3, CloudFront,
+            Route 53, ACM, and IAM — can be reproduced, version controlled, and modified through code rather than
+            clicking through the AWS console.
+          </p>
+          <p>
+            Existing resources (S3 and CloudFront) were imported into Terraform state so they could be managed
+            consistently alongside the new resources.
+          </p>
+        </div>
+
+        <div class="tool-card">
+          <h3>GitHub Actions</h3>
+          <p>
+            A CI/CD pipeline was set up using GitHub Actions. Every time code is pushed to the main branch, the
+            workflow automatically syncs the updated files to S3 and creates a CloudFront cache invalidation —
+            meaning the live site updates within minutes of a Git push.
+          </p>
+          <p>
+            A dedicated IAM user with least-privilege permissions was created specifically for the pipeline, with
+            credentials stored securely as GitHub Secrets.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section id="pipeline">
+      <h2>THE CI/CD PIPELINE</h2>
+      <p>Here is exactly what happens every time code is pushed to the main branch on GitHub:</p>
+
+      <div class="pipeline">
+        <div class="pipeline-step">
+          <div class="step-num">1</div>
+          <div class="step-text">
+            <strong>Code pushed to GitHub</strong>
+            <p>A git push to the main branch triggers the GitHub Actions workflow automatically.</p>
+          </div>
+        </div>
+        <div class="pipeline-step">
+          <div class="step-num">2</div>
+          <div class="step-text">
+            <strong>AWS credentials configured</strong>
+            <p>GitHub Actions uses stored secrets to authenticate with AWS as the dedicated deployer IAM user.</p>
+          </div>
+        </div>
+        <div class="pipeline-step">
+          <div class="step-num">3</div>
+          <div class="step-text">
+            <strong>Files synced to S3</strong>
+            <p>The workflow runs aws s3 sync, uploading changed files and removing deleted ones from the bucket.</p>
+          </div>
+        </div>
+        <div class="pipeline-step">
+          <div class="step-num">4</div>
+          <div class="step-text">
+            <strong>CloudFront cache invalidated</strong>
+            <p>A /* invalidation is created so CloudFront fetches fresh files from S3 on the next request.</p>
+          </div>
+        </div>
+        <div class="pipeline-step">
+          <div class="step-num">5</div>
+          <div class="step-text">
+            <strong>Live site updated</strong>
+            <p>Within minutes, the changes are live at https://resq.com.ng for visitors worldwide.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="lessons">
+      <h2>LESSONS LEARNED</h2>
+      <p>
+        This project pushed beyond basic cloud concepts and into real-world infrastructure challenges. Some of the
+        key things learned along the way:
+      </p>
+      <ul class="lessons-list">
+        <li>ACM certificates for CloudFront must always be created in us-east-1 regardless of where your other resources are.</li>
+        <li>Importing existing AWS resources into Terraform requires careful state management — each resource needs to be imported before applying changes.</li>
+        <li>CloudFront distributions with WAF or pricing plan subscriptions have restrictions on what can be changed, requiring the Terraform config to match the existing setup exactly.</li>
+        <li>The principle of least privilege matters — the GitHub Actions IAM user only has S3 and CloudFront invalidation permissions, nothing more.</li>
+        <li>DNS propagation for .com.ng domains can be slower than standard .com domains due to the .ng registry.</li>
+        <li>Infrastructure as Code makes the entire setup reproducible — the whole project can be rebuilt from scratch by running terraform apply.</li>
+      </ul>
+    </section>
+
+    <footer>
+      <p>Built by Farouk Fasasi · <a href="/Index.html">Back to Home</a></p>
+    </footer>
+  </main>
+
+</body>
+</html>
