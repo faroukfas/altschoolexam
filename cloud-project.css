@@ -227,20 +227,9 @@ main a:hover {
 
 /* ── Responsive ── */
 @media (max-width: 768px) {
-  .arch-grid,
-  .tools-grid {
-    grid-template-columns: 1fr;
-  }
-
-  .flow-steps {
-    flex-direction: column;
-  }
-
-  .flow-arrow {
-    transform: rotate(90deg);
-  }
-
-  #hero h1 {
-    font-size: 26px;
+  nav ul li a {
+    display: block;
+    padding: 10px 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
   }
 }
